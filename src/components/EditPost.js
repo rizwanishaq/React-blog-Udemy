@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { useImmerReducer } from "use-immer";
 import Page from "./Page";
 import { useParams, Link, withRouter } from "react-router-dom";
 import axios from "axios";
-import Moment from "react-moment";
 import LoadingDotsIcon from "./LoadingDotsIcon";
 import AuthContext from "../context/auth/authContext";
 import NotFound from "./NotFound";
@@ -69,6 +68,8 @@ const EditPost = (props) => {
       case "notFound":
         draft.notFound = true;
         return;
+      default:
+        return;
     }
   };
   const [state, dispatch] = useImmerReducer(editReducer, originalState);
@@ -115,7 +116,7 @@ const EditPost = (props) => {
       const ourRequest = axios.CancelToken.source();
       const fetchPost = async () => {
         try {
-          const response = await axios.post(
+          await axios.post(
             `/post/${state.id}/edit`,
             {
               title: state.title.value,

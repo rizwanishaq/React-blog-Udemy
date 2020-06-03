@@ -1,6 +1,5 @@
-import React, { useContext } from "react";
+import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { CSSTransition } from "react-transition-group";
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";

@@ -34,11 +34,11 @@ const ViewSinglePost = (props) => {
       ourRequest.cancel();
     };
     // eslint-disable-next-line
-  }, []);
+  }, [id]);
 
   const isOwner = () => {
     if (loggedIn) {
-      return user.username == post.author.username;
+      return user.username === post.author.username;
     }
     return false;
   };
@@ -63,7 +63,7 @@ const ViewSinglePost = (props) => {
         const response = await axios.delete(`/post/${id}`, {
           data: { token: user.token },
         });
-        if (response.data == "Success") {
+        if (response.data === "Success") {
           flashMessage("Post was successfully  deleted");
           props.history.push(`/profile/${user.username}`);
         }
