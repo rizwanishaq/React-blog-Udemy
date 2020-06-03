@@ -15,6 +15,7 @@ import Profile from "./components/Profile";
 import EditPost from "./components/EditPost";
 import NotFound from "./components/NotFound";
 import Search from "./components/Search";
+import Chat from "./components/Chat";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route component={NotFound} />
         </Switch>
         <Search />
+        <Chat />
         <Footer />
       </BrowserRouter>
     </AuthState>

@@ -4,7 +4,9 @@ import AuthContext from "../context/auth/authContext";
 import ReactTooltip from "react-tooltip";
 
 const HeaderLoggedIn = (props) => {
-  const { logout, user, openSearch } = useContext(AuthContext);
+  const { logout, user, openSearch, toggleChat, unreadChatCount } = useContext(
+    AuthContext
+  );
 
   const handleLogout = () => {
     logout();
@@ -16,6 +18,7 @@ const HeaderLoggedIn = (props) => {
 
   return (
     <div className="flex-row my-3 my-md-0">
+      {/*eslint-disable-next-line*/}
       <a
         data-for="search"
         data-tip="Search"
@@ -27,13 +30,23 @@ const HeaderLoggedIn = (props) => {
       </a>
       <ReactTooltip place="bottom" id="search" className="custom-tooltip" />{" "}
       <span
+        onClick={() => toggleChat()}
         data-for="chat"
         data-tip="Chat"
-        className="mr-2 header-chat-icon text-white"
+        className={
+          "mr-2 header-chat-icon " +
+          (unreadChatCount ? "text-danger" : "text-white")
+        }
       >
         <i className="fas fa-comment"></i>
 
-        <span className="chat-count-badge text-white"> </span>
+        {unreadChatCount ? (
+          <span className="chat-count-badge text-white">
+            {unreadChatCount < 10 ? unreadChatCount : "9+"}
+          </span>
+        ) : (
+          ""
+        )}
       </span>
       <ReactTooltip place="bottom" id="chat" className="custom-tooltip" />{" "}
       <Link
@@ -42,7 +55,11 @@ const HeaderLoggedIn = (props) => {
         to={`/profile/${user.username}`}
         className="mr-2"
       >
-        <img className="small-header-avatar" src={user.avatar} />
+        <img
+          className="small-header-avatar"
+          src={user.avatar}
+          alt={user.avatar}
+        />
       </Link>
       <ReactTooltip place="bottom" id="profile" className="custom-tooltip" />{" "}
       <Link className="btn btn-sm btn-success mr-2" to="/create-post">

@@ -62,7 +62,7 @@ const Profile = () => {
 
       const fetchData = async () => {
         try {
-          const response = await axios.post(
+          await axios.post(
             `/addFollow/${state.profileData.profileUsername}`,
             {
               token: user.token,
@@ -98,7 +98,7 @@ const Profile = () => {
 
       const fetchData = async () => {
         try {
-          const response = await axios.post(
+          await axios.post(
             `/removeFollow/${state.profileData.profileUsername}`,
             {
               token: user.token,
@@ -148,8 +148,8 @@ const Profile = () => {
         {state.profileData.profileUsername}
         {loggedIn &&
           !state.profileData.isFollowing &&
-          user.username != state.profileData.profileUsername &&
-          state.profileData.profileUsername != "..." && (
+          user.username !== state.profileData.profileUsername &&
+          state.profileData.profileUsername !== "..." && (
             <button
               onClick={startFollowing}
               disabled={state.followActionLoading}
@@ -160,8 +160,8 @@ const Profile = () => {
           )}
         {loggedIn &&
           state.profileData.isFollowing &&
-          user.username != state.profileData.profileUsername &&
-          state.profileData.profileUsername != "..." && (
+          user.username !== state.profileData.profileUsername &&
+          state.profileData.profileUsername !== "..." && (
             <button
               onClick={stopFollowing}
               disabled={state.followActionLoading}

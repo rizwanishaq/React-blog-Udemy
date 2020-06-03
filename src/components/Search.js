@@ -73,6 +73,7 @@ const Search = () => {
       fetchResults();
       return () => ourRequest.cancel();
     }
+    // eslint-disable-next-line
   }, [state.requestCount]);
 
   const handleInput = (e) => {

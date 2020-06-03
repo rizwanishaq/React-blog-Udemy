@@ -14,6 +14,8 @@ const AuthState = (props) => {
       avatar: localStorage.getItem("complexappAvatar"),
     },
     isSearchOpen: false,
+    isChatOpen: false,
+    unreadChatCount: 0,
   };
 
   const [state, dispatch] = useImmerReducer(authReducer, initialState);
@@ -37,6 +39,20 @@ const AuthState = (props) => {
   const closeSearch = () => {
     dispatch({ type: "closeSearch" });
   };
+  const toggleChat = () => {
+    dispatch({ type: "toggleChat" });
+  };
+
+  const closeChat = () => {
+    dispatch({ type: "closeChat" });
+  };
+  const incrementUnreadChatCount = () => {
+    dispatch({ type: "incrementUnreadChatCount" });
+  };
+
+  const clearUnreadChatCount = () => {
+    dispatch({ type: "clearUnreadChatCount" });
+  };
 
   useEffect(() => {
     if (state.loggedIn) {
@@ -56,13 +72,19 @@ const AuthState = (props) => {
       value={{
         user: state.user,
         loggedIn: state.loggedIn,
+        unreadChatCount: state.unreadChatCount,
         login,
         logout,
         flashMessage,
         messages: state.flashMessages,
         isSearchOpen: state.isSearchOpen,
+        isChatOpen: state.isChatOpen,
         openSearch,
         closeSearch,
+        toggleChat,
+        closeChat,
+        clearUnreadChatCount,
+        incrementUnreadChatCount,
       }}
     >
       {props.children}

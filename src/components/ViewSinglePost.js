@@ -88,7 +88,8 @@ const ViewSinglePost = (props) => {
             >
               <i className="fas fa-edit"></i>
             </Link>
-            <ReactTooltip id="edit" className="custom-tooltip" />{" "}
+            <ReactTooltip id="edit" className="custom-tooltip" />
+            {/*eslint-disable-next-line*/}
             <a
               data-tip="Delete"
               data-for="delete"
