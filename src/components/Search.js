@@ -2,8 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { useImmer } from "use-immer";
 import AuthContext from "../context/auth/authContext";
 import axios from "axios";
-import Moment from "react-moment";
-import { Link } from "react-router-dom";
+import Post from "./Post";
 
 const Search = () => {
   const { isSearchOpen, closeSearch } = useContext(AuthContext);
@@ -129,26 +128,11 @@ const Search = () => {
                 </div>
                 {state.results.map((post) => {
                   return (
-                    <Link
-                      onClick={() => closeSearch()}
+                    <Post
+                      post={post}
                       key={post._id}
-                      to={`/post/${post._id}`}
-                      className="list-group-item list-group-item-action"
-                    >
-                      <img
-                        className="avatar-tiny"
-                        src={post.author.avatar}
-                        alt={post.author.avatar}
-                      />{" "}
-                      <strong>{post.title}</strong>{" "}
-                      <span className="text-muted small">
-                        {" "}
-                        by {post.author.username} on{" "}
-                        <Moment format="YYYY-MM-DD HH:mm">
-                          {post.createdDate}
-                        </Moment>
-                      </span>
-                    </Link>
+                      onClick={() => closeSearch()}
+                    />
                   );
                 })}
               </div>
